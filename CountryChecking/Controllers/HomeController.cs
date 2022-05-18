@@ -25,13 +25,13 @@ namespace CountryChecking.Controllers
         }
 
         [HttpPost]
-        public IActionResult GetAdress(string Country, string City, string Street, string District, string Zip, int HouseNumber)
+        public IActionResult GetAdress(string Country, string City, string Street, string District, string Zip, string HouseNumber)
         {
             var ListAdresses = _checkerService.GetAdressesInfo(Country, City, Street, District, Zip, HouseNumber);
             return Json(ListAdresses);
         }
         [HttpGet]
-        public IActionResult GetOutput(string Country, string City, string Street, string District, string Zip, int HouseNumber)
+        public IActionResult GetOutput(string Country, string City, string Street, string District, string Zip, string HouseNumber)
         {
             var first = _checkerService.GetAdressesInfo(Country, City, Street, District, Zip, HouseNumber).FirstOrDefault();
             if(first == null)

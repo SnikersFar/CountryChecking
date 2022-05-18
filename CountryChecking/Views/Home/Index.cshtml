@@ -57,30 +57,31 @@
 </form>
 
 <div id="zatemnenie">
-    <div id="okno">
-        <table class="table">
-            <thead class="thead-inverse">
-                <tr>
-                    <th>#</th>
-                    <th>Country</th>
-                    <th>District</th>
-                    <th>City</th>
-                    <th>Postal Code</th>
-                    <th>Street</th>
-                    <th>House Number</th>
-                </tr>
-            </thead>
-            <tbody class="bodyOfTable">
-                @*  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    </tr>*@
-
-            </tbody>
-        </table>
-        <div style="width: 100%; display: flex;">
+    <div id="okno" class="Panel">
+        <div class="UpPanel">
+            <table class="table">
+                <thead class="thead-inverse">
+                    <tr>
+                        <th>#</th>
+                        <th>Country</th>
+                        <th>District</th>
+                        <th>City</th>
+                        <th>Postal Code</th>
+                        <th>Street</th>
+                        <th>House Number</th>
+                    </tr>
+                </thead>
+                <tbody class="bodyOfTable">
+                    @*  <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        </tr>*@
+                </tbody>
+            </table>
+        </div>
+        <div class="PanelButtons" style="width: 100%; display: flex;">
             <button style="width: 100%;" type="button" class="btn btn-primary chooseButton">Choose</button>
             <button href="#" style="width: 100%;" type="reset" class="btn btn-danger CancelChoose">Cancel</button>
         </div>

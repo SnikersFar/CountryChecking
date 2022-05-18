@@ -24,15 +24,15 @@ namespace CountryChecking
             //    m_sStreet = "Offenbachstr",
             //    m_sZIP = "81245",
             //    m_sDistrict = "",
-            //    m_iHouseNo = 4,
+                
             //};
 
-            
-            //var resAuto = post.UCheckAddressAsync("testuser", "TgNmUh-uw!sl$", 10, adress);
+
+            //var resAuto = post.UCheckAddressAsync("testuser", "TgNmUh-uw!sl$", 2, adress);
             //resAuto.Wait();
 
             //Console.WriteLine();
-            //    Console.WriteLine("123");
+            //Console.WriteLine("123");
             CreateHostBuilder(args).Build().Run();
         }
 

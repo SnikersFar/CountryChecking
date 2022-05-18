@@ -8,41 +8,59 @@ namespace CountryChecking.Services
     {
         private const string LOGIN = "testuser";
         private const string PASSWORD = "TgNmUh-uw!sl$";
-        private const int TOOLERANCE = 10;
-        public List<AdressViewModel> GetAdressesInfo(string Country, string City, string Street, string District, string Zip, int HouseNumber)
+        private const int TOOLERANCE = 2;
+        public List<AdressViewModel> GetAdressesInfo(string Country, string City, string Street, string District, string Zip, string StrNumber)
         {
             var service = new ServiceReference1.CheckAddressRequestBody();
 
             var post = new ServiceReference1.QACWebServiceSoapClient(ServiceReference1.QACWebServiceSoapClient.EndpointConfiguration.QACWebServiceSoap12);
 
-            var adress = new ServiceReference1.ClQACAddress()
+            ClQACAddress adress;
+            int HouseNumber;
+            if (int.TryParse(StrNumber, out HouseNumber))
             {
-                m_sCountry = Country,
-                m_sCity = Street,
-                m_sStreet = Street,
-                m_sZIP = Zip,
-                m_iHouseNo = HouseNumber,
-                m_sDistrict = District,
-            };
-           
-            
+                adress = new ServiceReference1.ClQACAddress()
+                {
+                    m_sCountry = Country,
+                    m_sCity = City,
+                    m_sStreet = Street,
+                    m_sZIP = Zip,
+                    m_iHouseNo = HouseNumber,
+                    m_sDistrict = District,
+                };
+            }
+            else
+            {
+                adress = new ServiceReference1.ClQACAddress()
+                {
+                    m_sCountry = Country,
+                    m_sCity = City,
+                    m_sStreet = Street,
+                    m_sZIP = Zip,
+                    m_sDistrict = District,
+                };
+            }
+ 
             var res = post.UCheckAddressAsync(LOGIN, PASSWORD, TOOLERANCE, adress);
             res.Wait();
 
-            if(res.Result.Body.UCheckAddressResult.SimilarAddresses.Count <= 0 || res.Result.Body.UCheckAddressResult.ResultStatus != -1)
+            if(res.Result.Body.UCheckAddressResult.SimilarAddresses.Count <= 0 || res.Result.Body.UCheckAddressResult.ResultStatus == -1)
                 return null;
 
             var ListAdresses = new List<AdressViewModel>();
-            foreach(ClQACAddress MyAdress in res.Result.Body.UCheckAddressResult.SimilarAddresses)
+
+            var listRes = res.Result.Body.UCheckAddressResult.SimilarAddresses;
+            foreach (ClQACSimilarAddress MyAdress in listRes)
             {
-                var AdressViewModel = new AdressViewModel()
+               
+              var AdressViewModel = new AdressViewModel()
                 {
-                    Country = MyAdress.m_sCountry,
-                    City = MyAdress.m_sCity,
-                    District = MyAdress.m_sDistrict,
-                    Street = MyAdress.m_sStreet,
-                    HouseNumber = MyAdress.m_iHouseNo,
-                    PostalCode = MyAdress.m_sZIP
+                    Country = MyAdress.Address.m_sCountry,
+                    City = MyAdress.Address.m_sCity,
+                    District = MyAdress.Address.m_sDistrict,
+                    Street = MyAdress.Address.m_sStreet,
+                    HouseNumber = MyAdress.Address.m_iHouseNo,
+                    PostalCode = MyAdress.Address.m_sZIP
                 };
                 ListAdresses.Add(AdressViewModel);
             }

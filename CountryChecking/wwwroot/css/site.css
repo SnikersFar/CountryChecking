@@ -83,7 +83,6 @@ body {
 }
 
 #okno {
-    width: 500px;
     height: 220px;
     text-align: start;
     padding: 15px;
@@ -100,4 +99,11 @@ body {
 
 #zatemnenie:target {
     display: block;
+}
+
+.UpPanel {
+    width: auto;
+    overflow-y: auto;
+    /* display: flex; */
+    height: 100%;   
 }
