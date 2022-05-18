@@ -1,0 +1,88 @@
+﻿@section Sprites{
+<script src="~/js/site.js"></script>
+}
+
+<h2>Cheking Address</h2>
+<form id="addForm">
+    <div class="form-select">
+        <label for="exampleInputEmail1">Country</label>
+        <select name="Country" style="width:100%;" required class="form-select CountrySelect" aria-label="Choose a country!">
+            <option value="DE"> Germany</option>
+            <option value="AT"> Austria</option>
+            <option value="CH"> Switzerland</option>
+            <option value="BE"> Belgium</option>
+            <option value="DK"> Denmark</option>
+            <option value="FI"> Finland</option>
+            <option value="FR"> France</option>
+            <option value="GB"> Great Britain</option>
+            <option value="IT"> Italy</option>
+            <option value="NL"> Netherlands</option>
+            <option value="NO"> Norway</option>
+            <option value="PL"> Poland</option>
+            <option value="PT"> Portugal</option>
+            <option value="SE"> Sweden</option>
+            <option value="ES"> Spain</option>
+        </select>
+    </div>
+    <div style="display: flex; width: 100%; margin-bottom: 2%;">
+        <div style="width: 100%">
+            <label>ZipCode</label>
+            <input name="Zip" type="text" class="form-control Zip">
+        </div>
+        <div style="width: 100%">
+            <label for="exampleInputPassword1">City</label>
+            <input name="City" type="text" class="form-control City">
+        </div>
+    </div>
+    <div style="display: flex; margin-bottom: 2%;">
+        <div style="width: 100%">
+            <label>Street</label>
+            <input name="Street" type="text" class="form-control Street">
+        </div>
+        <div style="width: 100%">
+            <label for="exampleInputPassword1">House Number</label>
+            <input name="HouseNumber" type="text" class="form-control HouseNumber">
+        </div>
+    </div>
+    <div>
+        <label>District</label>
+        <input name="District" type="text" class="form-control District">
+    </div>
+    <div style="width: 100%; display: flex;">
+        <button style="width: 100%;" type="button" class="btn btn-primary submitButton">Submit</button>
+        <button style="width: 100%;" type="reset" class="btn btn-danger">Clear</button>
+    </div>
+    <label>Output:</label>
+    <textarea class="Output" style="width: 100%; min-width: 100%; max-width:100%;" disabled></textarea>
+</form>
+
+<div id="zatemnenie">
+    <div id="okno">
+        <table class="table">
+            <thead class="thead-inverse">
+                <tr>
+                    <th>#</th>
+                    <th>Country</th>
+                    <th>District</th>
+                    <th>City</th>
+                    <th>Postal Code</th>
+                    <th>Street</th>
+                    <th>House Number</th>
+                </tr>
+            </thead>
+            <tbody class="bodyOfTable">
+                @*  <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                    </tr>*@
+
+            </tbody>
+        </table>
+        <div style="width: 100%; display: flex;">
+            <button style="width: 100%;" type="button" class="btn btn-primary chooseButton">Choose</button>
+            <button href="#" style="width: 100%;" type="reset" class="btn btn-danger CancelChoose">Cancel</button>
+        </div>
+    </div>
+</div>
