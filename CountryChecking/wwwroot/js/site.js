@@ -58,6 +58,14 @@ $(document).ready(function () {
 
             }
             else {
+
+                $(".CountrySelect").val(adresses[0].Country);
+                $(".City").val(adresses[0].City);
+                $(".Street").val(adresses[0].Street);
+                $(".District").val(adresses[0].District);
+                $(".Zip").val(adresses[0].PostalCode);
+                $(".HouseNumber").val(adresses[0].HouseNumber);
+
                 $.get('/Home/GetOutput',
                     {
                         Country: $(".CountrySelect").val(),
@@ -85,8 +93,8 @@ $(document).ready(function () {
         $(".CountrySelect").val(chooseAdress.Country);
         $(".City").val(chooseAdress.City);
         $(".Street").val(chooseAdress.Street);
-        $(".District").val(chooseAdress.District),
-            $(".Zip").val(chooseAdress.PostalCode);
+        $(".District").val(chooseAdress.District);
+        $(".Zip").val(chooseAdress.PostalCode);
         $(".HouseNumber").val(chooseAdress.HouseNumber);
 
 

@@ -6,7 +6,9 @@ namespace CountryChecking.Services
 {
     public class CheckerService
     {
-
+        private const string LOGIN = "testuser";
+        private const string PASSWORD = "TgNmUh-uw!sl$";
+        private const int TOOLERANCE = 10;
         public List<AdressViewModel> GetAdressesInfo(string Country, string City, string Street, string District, string Zip, int HouseNumber)
         {
             var service = new ServiceReference1.CheckAddressRequestBody();
@@ -24,7 +26,7 @@ namespace CountryChecking.Services
             };
            
             
-            var res = post.UCheckAddressAsync("testuser", "TgNmUh-uw!sl$", 10, adress);
+            var res = post.UCheckAddressAsync(LOGIN, PASSWORD, TOOLERANCE, adress);
             res.Wait();
 
             if(res.Result.Body.UCheckAddressResult.SimilarAddresses.Count <= 0 || res.Result.Body.UCheckAddressResult.ResultStatus != -1)
