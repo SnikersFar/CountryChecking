@@ -132,6 +132,7 @@ $(document).ready(function () {
         ).done(function (outInfo) {
             $(".Output").val(outInfo);
         });
+        window.location.hash = "";
     });
 });
 

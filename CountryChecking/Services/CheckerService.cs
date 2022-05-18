@@ -16,8 +16,7 @@ namespace CountryChecking.Services
             var post = new ServiceReference1.QACWebServiceSoapClient(ServiceReference1.QACWebServiceSoapClient.EndpointConfiguration.QACWebServiceSoap12);
 
             ClQACAddress adress;
-            int HouseNumber;
-            if (int.TryParse(StrNumber, out HouseNumber))
+            if (int.TryParse(StrNumber, out int HouseNumber))
             {
                 adress = new ServiceReference1.ClQACAddress()
                 {
@@ -27,6 +26,9 @@ namespace CountryChecking.Services
                     m_sZIP = Zip,
                     m_iHouseNo = HouseNumber,
                     m_sDistrict = District,
+                    m_iHouseNoStart = 1,
+                    m_iHouseNoEnd = 100,
+                    
                 };
             }
             else
@@ -38,9 +40,12 @@ namespace CountryChecking.Services
                     m_sStreet = Street,
                     m_sZIP = Zip,
                     m_sDistrict = District,
+                    m_iHouseNoStart = 1,
+                    m_iHouseNoEnd = 100,
+                    
                 };
             }
- 
+
             var res = post.UCheckAddressAsync(LOGIN, PASSWORD, TOOLERANCE, adress);
             res.Wait();
 
