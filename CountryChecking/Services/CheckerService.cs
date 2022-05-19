@@ -9,6 +9,7 @@ namespace CountryChecking.Services
         private const string LOGIN = "testuser";
         private const string PASSWORD = "TgNmUh-uw!sl$";
         private const int TOOLERANCE = 2;
+        private const int MIN_SIMILARITY_FOR_ONE = 95;
         public List<AdressViewModel> GetAdressesInfo(string Country, string City, string Street, string District, string Zip, string StrNumber)
         {
             var service = new ServiceReference1.CheckAddressRequestBody();
@@ -75,7 +76,7 @@ namespace CountryChecking.Services
                 }
                 ListAdresses.Add(adressViewModel);
             }
-            if(addressView.Similarity >= 94)
+            if(addressView.Similarity >= MIN_SIMILARITY_FOR_ONE)
             {
                 return new List<AdressViewModel>() { addressView };
             }
