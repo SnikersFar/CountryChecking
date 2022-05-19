@@ -28,7 +28,7 @@ namespace CountryChecking.Services
                     m_sDistrict = District,
                     m_iHouseNoStart = 1,
                     m_iHouseNoEnd = 100,
-                    
+
                 };
             }
             else
@@ -42,32 +42,42 @@ namespace CountryChecking.Services
                     m_sDistrict = District,
                     m_iHouseNoStart = 1,
                     m_iHouseNoEnd = 100,
-                    
+
                 };
             }
 
             var res = post.UCheckAddressAsync(LOGIN, PASSWORD, TOOLERANCE, adress);
             res.Wait();
 
-            if(res.Result.Body.UCheckAddressResult.SimilarAddresses.Count <= 0 || res.Result.Body.UCheckAddressResult.ResultStatus == -1)
+            if (res.Result.Body.UCheckAddressResult.SimilarAddresses.Count <= 0 || res.Result.Body.UCheckAddressResult.ResultStatus == -1)
                 return null;
 
             var ListAdresses = new List<AdressViewModel>();
 
             var listRes = res.Result.Body.UCheckAddressResult.SimilarAddresses;
+            var addressView = new AdressViewModel() { Similarity = 0 };
             foreach (ClQACSimilarAddress MyAdress in listRes)
             {
-               
-              var AdressViewModel = new AdressViewModel()
+
+                var adressViewModel = new AdressViewModel()
                 {
                     Country = MyAdress.Address.m_sCountry,
                     City = MyAdress.Address.m_sCity,
                     District = MyAdress.Address.m_sDistrict,
                     Street = MyAdress.Address.m_sStreet,
                     HouseNumber = MyAdress.Address.m_iHouseNo,
-                    PostalCode = MyAdress.Address.m_sZIP
+                    PostalCode = MyAdress.Address.m_sZIP,
+                    Similarity = MyAdress.Similarity,
                 };
-                ListAdresses.Add(AdressViewModel);
+                if(adressViewModel.Similarity > addressView.Similarity)
+                {
+                    addressView = adressViewModel;
+                }
+                ListAdresses.Add(adressViewModel);
+            }
+            if(addressView.Similarity >= 95)
+            {
+                return new List<AdressViewModel>() { addressView };
             }
             return ListAdresses;
         }

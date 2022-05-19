@@ -8,5 +8,6 @@
         public string Street { get; set; }
         public string PostalCode { get; set; }
         public int? HouseNumber { get; set; }
+        public int Similarity { get; set; }
     }
 }
