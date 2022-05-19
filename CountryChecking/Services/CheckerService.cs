@@ -75,7 +75,7 @@ namespace CountryChecking.Services
                 }
                 ListAdresses.Add(adressViewModel);
             }
-            if(addressView.Similarity >= 95)
+            if(addressView.Similarity >= 94)
             {
                 return new List<AdressViewModel>() { addressView };
             }
