@@ -27,12 +27,14 @@ namespace CountryChecking.Controllers
         [HttpPost]
         public IActionResult GetAdress(string Country, string City, string Street, string District, string Zip, string HouseNumber)
         {
+            CheckOnNUll(ref Country, ref City, ref Street, ref District, ref Zip, ref HouseNumber);
             var ListAdresses = _checkerService.GetAdressesInfo(Country, City, Street, District, Zip, HouseNumber);
             return Json(ListAdresses);
         }
         [HttpGet]
         public IActionResult GetOutput(string Country, string City, string Street, string District, string Zip, string HouseNumber)
         {
+            CheckOnNUll(ref Country, ref City, ref Street, ref District, ref Zip, ref HouseNumber);
             var first = _checkerService.GetAdressesInfo(Country, City, Street, District, Zip, HouseNumber).FirstOrDefault();
             if(first == null)
             {
@@ -45,6 +47,20 @@ namespace CountryChecking.Controllers
                 $"{(first.District != "" || first.District != null ? first.District : "")}.");
         }
 
-
+        private void CheckOnNUll(ref string Country, ref string City, ref string Street, ref string District, ref string Zip, ref string HouseNumber)
+        {
+            if (Country == null)
+                Country = "";
+            if (City == null)
+                City = "";
+            if (Street == null)
+                Street = "";
+            if (District == null)
+                District = "";
+            if (Zip == null)
+                Zip = "";
+            if (HouseNumber == null)
+                HouseNumber = "";
+        }
     }
 }
