@@ -1,6 +1,7 @@
 ﻿using CountryChecking.Models;
 using ServiceReference1;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CountryChecking.Services
 {
@@ -54,6 +55,18 @@ namespace CountryChecking.Services
                 return null;
 
             var ListAdresses = new List<AdressViewModel>();
+            bool multiply = true;
+            switch (res.Result.Body.UCheckAddressResult.ResultStatus)
+            {
+                case -2:
+                case -1:
+                case  0:
+                    return null;
+                case 1:
+                case 2:
+                    multiply = false;
+                    break;
+            }
 
             var listRes = res.Result.Body.UCheckAddressResult.SimilarAddresses;
             var addressView = new AdressViewModel() { Similarity = 0 };
@@ -70,15 +83,11 @@ namespace CountryChecking.Services
                     PostalCode = MyAdress.Address.m_sZIP,
                     Similarity = MyAdress.Similarity,
                 };
-                if(adressViewModel.Similarity > addressView.Similarity)
-                {
-                    addressView = adressViewModel;
-                }
                 ListAdresses.Add(adressViewModel);
             }
-            if(addressView.Similarity >= MIN_SIMILARITY_FOR_ONE)
+            if(!multiply)
             {
-                return new List<AdressViewModel>() { addressView };
+                return new List<AdressViewModel>() { ListAdresses.FirstOrDefault() };
             }
             return ListAdresses;
         }

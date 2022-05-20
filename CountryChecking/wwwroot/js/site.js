@@ -6,6 +6,7 @@ $(document).ready(function () {
     $(".submitButton").click(function (event) {
         console.log("123");
         event.preventDefault();
+        console.log("HOUSE NUMBE TO PUT: " + $(".HouseNumberF").val());
         $.post('/Home/GetAdress',
             {
                 Country: $(".CountrySelect").val(),
@@ -13,7 +14,7 @@ $(document).ready(function () {
                 Street: $(".Street").val(),
                 District: $(".District").val(),
                 Zip: $(".Zip").val(),
-                HouseNumber: $(".HouseNumber").val(),
+                HouseNumber: $(".HouseNumberF").val().toString(),
             }
         ).done(function (adresses) {
             console.log(adresses);
@@ -21,6 +22,7 @@ $(document).ready(function () {
             bodyTable.html('');
             if (adresses == null) {
                 console.log("IS NULL");
+                console.log("houseNumber: " + $(".HouseNumberF").val().toString());
                 $.get('/Home/GetOutput',
                     {
                         Country: $(".CountrySelect").val(),
@@ -28,7 +30,7 @@ $(document).ready(function () {
                         Street: $(".Street").val(),
                         District: $(".District").val(),
                         Zip: $(".Zip").val(),
-                        HouseNumber: $(".HouseNumber").val(),
+                        HouseNumber: $(".HouseNumberF").val().toString(),
                     }
                 ).done(function (outInfo) {
                     $(".Output").val(outInfo);
@@ -92,7 +94,7 @@ $(document).ready(function () {
                         Street: $(".Street").val(),
                         District: $(".District").val(),
                         Zip: $(".Zip").val(),
-                        HouseNumber: $(".HouseNumber").val(),
+                        HouseNumber: $(".HouseNumberF").val().toString(),
                     }
                 ).done(function (outInfo) {
                     $(".Output").val(outInfo);
@@ -119,7 +121,7 @@ $(document).ready(function () {
         $(".Zip").val(chooseAdress.postalCode);
         $(".HouseNumber").val(chooseAdress.houseNumber);
 
-
+        console.log("HOUSE NUMBER LOG: " + $(".HouseNumberF").val().toString());
         $.get('/Home/GetOutput',
             {
                 Country: $(".CountrySelect").val(),
@@ -127,7 +129,7 @@ $(document).ready(function () {
                 Street: $(".Street").val(),
                 District: $(".District").val(),
                 Zip: $(".Zip").val(),
-                HouseNumber: $(".HouseNumber").val(),
+                HouseNumber: $(".HouseNumberF").val().toString(),
             }
         ).done(function (outInfo) {
             $(".Output").val(outInfo);
